@@ -14,5 +14,13 @@ COLOR_BG = (30, 30, 30)
 COLOR_FREE = (255, 255, 255)
 COLOR_WALL = (0, 0, 0)
 COLOR_GRID_LINE = (200, 200, 200)
+COLOR_ROBOT = (50, 100, 255)
 
 FPS = 60
+
+DIRECTIONS = [
+    (-1, 0),  # up 
+    (1, 0),   # down
+    (0, -1),  # left
+    (0, 1)    # right
+]
