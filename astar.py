@@ -1,6 +1,6 @@
 import heapq
 import numpy as np
-import constants
+from constants import WALL, FREE, DIRECTIONS
 
 Position = tuple[int, int]
 
