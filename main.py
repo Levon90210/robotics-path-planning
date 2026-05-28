@@ -8,6 +8,7 @@ from astar import Position, astar
 from visualization import draw_grid, draw_robot, draw_goal, draw_path
 from constants import (
     LIDAR_RADIUS,
+    PANEL_WIDTH,
     UNKNOWN,
     WINDOW_WIDTH,
     WINDOW_HEIGHT,
@@ -19,8 +20,6 @@ from constants import (
     MOVE_DELAY,
     DIRECTIONS,
 )
-
-SCREEN_CAPTION = "Robotics Project"
 
 
 def lidar_scan(real_maze: np.ndarray, known_maze: np.ndarray, robot: Robot) -> None:
@@ -41,14 +40,18 @@ def main() -> None:
     pygame.init()
 
     screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-    pygame.display.set_caption(SCREEN_CAPTION)
+
+    font = pygame.font.SysFont(None, 28)
+    real_text = font.render("Real Maze", True, (255, 255, 255))
+    known_text = font.render("Known Maze", True, (255, 255, 255))
+    screen.blit(real_text, (20, 10))
+    screen.blit(known_text, (PANEL_WIDTH + 20, 10))
 
     clock = pygame.time.Clock()
     running = True
 
     maze = generate_maze(ROWS, COLS)
     known_maze = np.full((ROWS, COLS), UNKNOWN, dtype=np.int8)
-
     robot = Robot(row=1, col=1)
     goal = (ROWS - 2, COLS - 2)
 
@@ -71,11 +74,17 @@ def main() -> None:
 
         screen.fill(COLOR_BG)
 
-        draw_grid(screen, known_maze)
-        draw_goal(screen, goal)
+        draw_grid(screen, maze, offset_x=0)
+        draw_grid(screen, known_maze, offset_x=PANEL_WIDTH)
+        draw_goal(screen, goal, offset_x=0)
+        draw_goal(screen, goal, offset_x=PANEL_WIDTH)
         if path:
-            draw_path(screen, path)
-        draw_robot(screen, robot)
+            draw_path(screen, path, offset_x=PANEL_WIDTH)
+        draw_robot(screen, robot, offset_x=0)
+        draw_robot(screen, robot, offset_x=PANEL_WIDTH)
+        pygame.draw.line(
+            screen, (255, 255, 255), (PANEL_WIDTH, 0), (PANEL_WIDTH, WINDOW_HEIGHT), 5
+        )
 
         pygame.display.flip()
 
