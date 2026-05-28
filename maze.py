@@ -3,6 +3,7 @@ import random
 
 from constants import ROWS, COLS, WALL, FREE
 
+
 def create_empty_maze() -> np.ndarray:
     maze = np.zeros((ROWS, COLS), dtype=np.int8)
     maze[0, :] = WALL
@@ -10,6 +11,7 @@ def create_empty_maze() -> np.ndarray:
     maze[:, 0] = WALL
     maze[:, -1] = WALL
     return maze
+
 
 def generate_maze(rows: int, cols: int) -> np.ndarray:
     maze = np.ones((rows, cols), dtype=np.int8)
