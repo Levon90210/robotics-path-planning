@@ -22,7 +22,7 @@ COLOR_GOAL = (0, 200, 0)
 COLOR_PATH = (250, 250, 0)
 
 FPS = 60
-MOVE_DELAY = 60
+MOVE_DELAY = 70
 
 DIRECTIONS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 

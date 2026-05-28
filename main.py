@@ -42,12 +42,6 @@ def main() -> None:
     pygame.display.set_caption("Robotics Path Planning")
     screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
-    font = pygame.font.SysFont(None, 28)
-    real_text = font.render("Real Maze", True, (255, 255, 255))
-    known_text = font.render("Known Maze", True, (255, 255, 255))
-    screen.blit(real_text, (20, 10))
-    screen.blit(known_text, (PANEL_WIDTH + 20, 10))
-
     clock = pygame.time.Clock()
     running = True
 
