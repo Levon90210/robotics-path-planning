@@ -1,15 +1,11 @@
 import heapq
 import numpy as np
-from constants import WALL, FREE, DIRECTIONS
+from constants import FREE, WALL, DIRECTIONS
 
 Position = tuple[int, int]
 
 
 def astar(maze: np.ndarray, start: Position, goal: Position) -> list[Position]:
-    """
-    Returns a list of (row, col) from start to goal inclusive.
-    If no path exists, return empty list.
-    """
     rows, cols = maze.shape
 
     if not (0 <= start[0] < rows and 0 <= start[1] < cols):
@@ -48,20 +44,18 @@ def astar(maze: np.ndarray, start: Position, goal: Position) -> list[Position]:
 
             if 0 <= neighbor[0] < rows and 0 <= neighbor[1] < cols:
 
-                if maze[neighbor[0], neighbor[1]] == FREE:
+                if maze[neighbor[0], neighbor[1]] == WALL:
+                    continue
 
-                    test_g_score = g_score[current] + 1
+                test_g_score = g_score[current] + 1
 
-                    if test_g_score < g_score.get(neighbor, float("inf")):
-                        came_from[neighbor] = current
-                        g_score[neighbor] = test_g_score
-                        f_score[neighbor] = test_g_score + heuristic(neighbor, goal)
+                if test_g_score < g_score.get(neighbor, float("inf")):
+                    came_from[neighbor] = current
+                    g_score[neighbor] = test_g_score
+                    f_score[neighbor] = test_g_score + heuristic(neighbor, goal)
 
-                        if neighbor not in in_open:
-                            count += 1
-                            heapq.heappush(
-                                open_set, (f_score[neighbor], count, neighbor)
-                            )
-                            in_open.add(neighbor)
-
+                    if neighbor not in in_open:
+                        count += 1
+                        heapq.heappush(open_set, (f_score[neighbor], count, neighbor))
+                        in_open.add(neighbor)
     return []

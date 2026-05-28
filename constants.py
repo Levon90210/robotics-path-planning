@@ -13,10 +13,14 @@ GRID_LINE_WIDTH = 1
 COLOR_BG = (30, 30, 30)
 COLOR_FREE = (255, 255, 255)
 COLOR_WALL = (0, 0, 0)
+COLOR_UNKNOWN = (80, 80, 80)
 COLOR_GRID_LINE = (200, 200, 200)
 COLOR_ROBOT = (50, 100, 255)
 
 FPS = 60
 MOVE_DELAY = 60
 
-DIRECTIONS = [(-1, 0), (1, 0), (0, -1), (0, 1)]  # up  # down  # left  # right
+DIRECTIONS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+UNKNOWN = -1
+LIDAR_RADIUS = 4
