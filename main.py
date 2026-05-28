@@ -39,6 +39,7 @@ def lidar_scan(real_maze: np.ndarray, known_maze: np.ndarray, robot: Robot) -> N
 def main() -> None:
     pygame.init()
 
+    pygame.display.set_caption("Robotics Path Planning")
     screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
     font = pygame.font.SysFont(None, 28)
