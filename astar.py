@@ -1,6 +1,7 @@
 import heapq
 import numpy as np
-from constants import FREE, WALL, DIRECTIONS
+from constants import WALL, DIRECTIONS
+from utils import is_valid_cell
 
 Position = tuple[int, int]
 
@@ -8,22 +9,20 @@ Position = tuple[int, int]
 def astar(maze: np.ndarray, start: Position, goal: Position) -> list[Position]:
     rows, cols = maze.shape
 
-    if not (0 <= start[0] < rows and 0 <= start[1] < cols):
+    if not is_valid_cell(maze, start[0], start[1]):
         return []
-    if not (0 <= goal[0] < rows and 0 <= goal[1] < cols):
-        return []
-    if maze[start[0], start[1]] == WALL or maze[goal[0], goal[1]] == WALL:
+    if not is_valid_cell(maze, goal[0], goal[1]):
         return []
 
     def heuristic(p1: Position, p2: Position) -> int:
         return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
 
-    open_set = []
+    open_set: list[tuple[int, int, Position]] = []
     count = 0
     heapq.heappush(open_set, (0, count, start))
 
     in_open = {start}
-    came_from = {}
+    came_from: dict[Position, Position] = {}
     g_score = {start: 0}
     f_score = {start: heuristic(start, goal)}
 
